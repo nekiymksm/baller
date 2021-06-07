@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 moveDirection = new Vector3(0, 0, moveHorizontal);
 
-        if (_rigidbody.velocity.magnitude <= _maxSpeed)
+        if (_rigidbody.velocity.magnitude <= _maxSpeed && _rigidbody.position.y <= _minJumpPermission)
             _rigidbody.AddForce(moveDirection * _moveSpeed, ForceMode.Force);
     }
 
