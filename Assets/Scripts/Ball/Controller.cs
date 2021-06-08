@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+
+public class Controller : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _maxSpeed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _minJumpPermission;
 
@@ -20,21 +20,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        GetMove();
-        GetJump();
+        TryJump();
     }
 
-    private void GetMove()
-    {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-
-        Vector3 moveDirection = new Vector3(0, 0, moveHorizontal);
-
-        if (_rigidbody.velocity.magnitude <= _maxSpeed && _rigidbody.position.y <= _minJumpPermission)
-            _rigidbody.AddForce(moveDirection * _moveSpeed, ForceMode.Force);
-    }
-
-    private void GetJump()
+    private void TryJump()
     {
         float moveUp = Input.GetAxis("Jump");
 
