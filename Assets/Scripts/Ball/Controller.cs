@@ -25,7 +25,7 @@ public class Controller : MonoBehaviour
 
     private void TryJump()
     {
-        float moveUp = Input.GetAxis("Jump");
+        float moveUp = Input.GetAxis("Fire1");
 
         Vector3 moveDirection = new Vector3(0, moveUp, 0);
 
