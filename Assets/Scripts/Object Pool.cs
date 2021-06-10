@@ -13,27 +13,27 @@ public class ObjectPool : MonoBehaviour
     {
         for (int i = 0; i < _capacity; i++)
         {
-            GameObject prefabUnit = Instantiate(prefab, transform);
-            prefabUnit.SetActive(false);
+            GameObject item = Instantiate(prefab, transform);
+            item.SetActive(false);
 
-            _pool.Add(prefabUnit);
+            _pool.Add(item);
         }
     }
 
     protected bool TryGetObject(out GameObject result)
     {
-        result = null;
+        GameObject item;
 
-        GameObject spawnedItem;
+        result = null;
 
         while (result == null)
         {
-            spawnedItem = _pool[Random.Range(0, _pool.Count)];
+            item = _pool[Random.Range(0, _pool.Count)];
 
-            if (spawnedItem.activeSelf == false)
-                result = spawnedItem;
+            if (item.activeSelf == false)
+                result = item;
         }
 
-        return result;
+        return result != null;
     }
 }
