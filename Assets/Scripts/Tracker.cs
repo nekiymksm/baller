@@ -10,6 +10,6 @@ public class Tracker : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(_ball.transform.position.x - _xAxisIndent, transform.position.y, transform.position.z), _step);
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(_ball.transform.position.x, transform.position.y, transform.position.z), _step);
     }
 }

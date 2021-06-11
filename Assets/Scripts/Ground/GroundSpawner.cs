@@ -4,16 +4,26 @@ using UnityEngine;
 
 public class GroundSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _ground;
+    [SerializeField] private GameObject[] _groundParts;
+    [SerializeField] private Ball _ball;
 
     private Camera _camera;
 
-    private void Update()
+    private float _itemLength;
+
+    private void Start()
+    {
+        _camera = Camera.main;
+
+        _itemLength = _groundParts[0].transform.lossyScale.x;
+    }
+
+    private void FixedUpdate()
     {
         if (TryToSpawn(out GameObject ground))
         {
             ground.SetActive(true);
-            ground.transform.position = new Vector3(transform.parent.position.x + 55, -1.5f, 0);
+            ground.transform.position = new Vector3(_ball.transform.position.x + 45, 0, 0);
         }
 
         DisableGroundAboardScreen();
@@ -23,11 +33,11 @@ public class GroundSpawner : MonoBehaviour
     {
         ground = null;
 
-        for (int i = 0; i < _ground.Length; i++)
+        for (int i = 0; i < _groundParts.Length; i++)
         {
-            if (_ground[i].activeSelf == false)
+            if (_groundParts[i].activeSelf == false)
             {
-                ground = _ground[i];
+                ground = _groundParts[i];
 
                 break;
             }
@@ -38,18 +48,14 @@ public class GroundSpawner : MonoBehaviour
 
     private void DisableGroundAboardScreen()
     {
-        _camera = Camera.main;
+        Vector3 disablePoint = _camera.ViewportToWorldPoint(new Vector3(0, 0, _itemLength));
 
-        Vector3 disablePoint = _camera.ViewportToWorldPoint(new Vector3(0, 0, 25));
-
-        for (int i = 0; i < _ground.Length; i++)
+        for (int i = 0; i < _groundParts.Length; i++)
         {
-            if (_ground[i].activeSelf == true)
+            if (_groundParts[i].activeSelf == true)
             {
-                if (_ground[i].transform.position.x < disablePoint.x)
-                {
-                    _ground[i].SetActive(false);
-                }
+                if (_groundParts[i].transform.position.x < disablePoint.x)
+                    _groundParts[i].SetActive(false);
             }
         }
     }
