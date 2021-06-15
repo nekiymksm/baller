@@ -7,7 +7,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] private GameObject _container;
     [SerializeField] private float _capacity;
 
-    private List<GameObject> _pool = new List<GameObject>();
+    protected List<GameObject> _pool = new List<GameObject>();
 
     protected void Initialise(GameObject prefab)
     {
@@ -36,18 +36,4 @@ public class ObjectPool : MonoBehaviour
 
         return result != null;
     }
-
-    //private void DisableGroundAboardScreen()
-    //{
-    //    Vector3 disablePoint = _camera.ViewportToWorldPoint(new Vector3(0, 0, _itemLength));
-
-    //    for (int i = 0; i < _groundParts.Length; i++)
-    //    {
-    //        if (_groundParts[i].activeSelf == true)
-    //        {
-    //            if (_groundParts[i].transform.position.x < disablePoint.x)
-    //                _groundParts[i].SetActive(false);
-    //        }
-    //    }
-    //}
 }

@@ -5,12 +5,14 @@ using UnityEngine;
 public class Spawner : ObjectPool
 {
     [SerializeField] private GameObject[] _prefabs;
-    [SerializeField] private float _secondsBetweenSpawn;
+    [SerializeField] private GroundReMover _groundRespawner;
 
-    private float _elapsedTime = 0;
+    private Camera _camera;
 
     private void Start()
     {
+        _camera = Camera.main;
+
         for (int i = 0; i < _prefabs.Length; i++)
         {
             Initialise(_prefabs[i]);
@@ -19,16 +21,28 @@ public class Spawner : ObjectPool
 
     private void Update()
     {
-        _elapsedTime += Time.deltaTime;
-
-        if (_elapsedTime >= _secondsBetweenSpawn)
+        if (_groundRespawner.IsReSpawn())
         {
             if (TryGetObject(out GameObject item))
             {
-                _elapsedTime = 0;
-
                 item.SetActive(true);
                 item.transform.position = transform.position;
+            }
+        }
+
+        DisablePrefabsAboardScreen();
+    }
+
+    private void DisablePrefabsAboardScreen()
+    {
+        Vector3 disablePoint = _camera.ViewportToWorldPoint(new Vector3(0, 0, 10));
+
+        for (int i = 0; i < _pool.Count; i++)
+        {
+            if (_pool[i].activeSelf == true)
+            {
+                if (_pool[i].transform.position.x < disablePoint.x)
+                    _pool[i].SetActive(false);
             }
         }
     }
