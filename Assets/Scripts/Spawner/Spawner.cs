@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : ObjectPool
 {
     [SerializeField] private GameObject[] _prefabs;
-    [SerializeField] private GroundReMover _groundRespawner;
+    [SerializeField] private ReMover _groundReMover;
 
     private Camera _camera;
 
@@ -14,14 +14,12 @@ public class Spawner : ObjectPool
         _camera = Camera.main;
 
         for (int i = 0; i < _prefabs.Length; i++)
-        {
             Initialise(_prefabs[i]);
-        }
     }
 
     private void Update()
     {
-        if (_groundRespawner.IsReSpawn())
+        if (_groundReMover.IsMove())
         {
             if (TryGetObject(out GameObject item))
             {

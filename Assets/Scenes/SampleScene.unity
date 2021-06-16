@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ball: {fileID: 847801858}
-  _xAxisExtractionPointer: 10
-  _xAxisSpawnPointer: 20
+  _extractionPoint: {fileID: 1299730175}
+  _installationPoint: {fileID: 793237274}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,8 +339,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 793237273}
+  - component: {fileID: 793237274}
   m_Layer: 0
-  m_Name: Ground Spawn Pointer
+  m_Name: Installation Point
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -354,12 +355,24 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 793237272}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 360567597}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &793237274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793237272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51e47b8d3094f1c4d87b5956fa1e8975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &847801851
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,8 +622,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1299730174}
+  - component: {fileID: 1299730175}
   m_Layer: 0
-  m_Name: Ground Extraction Pointer
+  m_Name: Extraction Point
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -624,12 +638,24 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299730173}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 360567597}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1299730175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299730173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b13debdddedca4c9ef5c9d930a3810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1739242631
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,7 +667,7 @@ GameObject:
   - component: {fileID: 1739242633}
   - component: {fileID: 1739242632}
   m_Layer: 0
-  m_Name: Prefabs Spawn Pointer
+  m_Name: Prefabs Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -664,7 +690,7 @@ MonoBehaviour:
   _prefabs:
   - {fileID: 5257563127300925503, guid: 09ab03b82309cb343b266182e29ae723, type: 3}
   - {fileID: 6892857286919778847, guid: 235b4b67652ff3b44b4d3fb783eeb4b1, type: 3}
-  _groundRespawner: {fileID: 360567598}
+  _groundReMover: {fileID: 360567598}
 --- !u!4 &1739242633
 Transform:
   m_ObjectHideFlags: 0
