@@ -24,6 +24,11 @@ public class ReMover : MonoBehaviour
         }
     }
 
+    public void GroundReset()
+    {
+        transform.position = new Vector3(15, 0, 0);
+    }
+
     public bool IsMove()
     {
         return _isReMove;
