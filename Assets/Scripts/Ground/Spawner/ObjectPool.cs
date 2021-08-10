@@ -14,7 +14,7 @@ public class ObjectPool : MonoBehaviour
         {
             Item item = Instantiate(prefab, transform);
             item.gameObject.SetActive(false);
-
+            
             _pool.Add(item);
         }
     }

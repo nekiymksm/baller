@@ -7,6 +7,7 @@ public class Spawner : ObjectPool
     [SerializeField] private Item[] _items;
     [SerializeField] private ReMover _groundReMover;
     [SerializeField] private float _zCameraProjectionPointer;
+    [SerializeField] private SpawnPoint[] _spawnPoints;
 
     private Camera _camera;
 
@@ -25,7 +26,10 @@ public class Spawner : ObjectPool
             if (TryGetObject(out Item item))
             {
                 item.gameObject.SetActive(true);
-                item.transform.position = transform.position;
+                item.transform.position = _spawnPoints[Random.Range(0, _spawnPoints.Length)].transform.position;
+
+                for (int i = 0; i < item.transform.childCount; i++)
+                    item.transform.GetChild(i).gameObject.SetActive(true);
             }
         }
 
