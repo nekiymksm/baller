@@ -8,7 +8,9 @@ public class Game : MonoBehaviour
     [SerializeField] private Ball _ball;
     [SerializeField] private ReMover _reMover;
     [SerializeField] private GameOverScreen _gameOverScreen;
-    [SerializeField] private PlayerCamera _camera;
+
+    private Camera _camera;
+    private Vector3 _cameraStartPosition;
 
     private void OnEnable()
     {
@@ -26,6 +28,9 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
+        _camera = Camera.main;
+        _cameraStartPosition = _camera.transform.position;
+
         Time.timeScale = 1;
     }
 
@@ -38,7 +43,9 @@ public class Game : MonoBehaviour
     {
         _ball.BallReset();
         _reMover.GroundReset();
-        _camera.ResetCameraPosition();
+
+        _camera.transform.position = _cameraStartPosition;
+
         GameStart();
     }
 

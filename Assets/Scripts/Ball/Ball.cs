@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(SphereCollider))]
+
 public class Ball : MonoBehaviour
 {
     private int _score;
@@ -18,7 +20,7 @@ public class Ball : MonoBehaviour
 
             coin.gameObject.SetActive(false);
         }
-        else if (collision.TryGetComponent(out Barrier barrier))
+        else if (collision.isTrigger)
         {
             Die();
         }
@@ -28,13 +30,13 @@ public class Ball : MonoBehaviour
     {
         _score = 0;
         ScoreChanged?.Invoke(_score);
+
         transform.position = new Vector3(0, 1.8f, 0);
     }
 
     private void IncreaseScore()
     {
         _score++;
-
         ScoreChanged?.Invoke(_score);
     }
 

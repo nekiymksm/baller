@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 314418323638999540}
   - component: {fileID: -8394049651834812142}
   m_Layer: 0
-  m_Name: Coins Line
+  m_Name: CoinsLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4257488522365353816, guid: 09ab03b82309cb343b266182e29ae723, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4257488522365353816, guid: 09ab03b82309cb343b266182e29ae723, type: 3}
       propertyPath: m_LocalPosition.y
@@ -199,7 +199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4257488522365353816, guid: 09ab03b82309cb343b266182e29ae723, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 4257488522365353816, guid: 09ab03b82309cb343b266182e29ae723, type: 3}
       propertyPath: m_LocalPosition.y
