@@ -8,9 +8,15 @@ using UnityEngine.Events;
 public class Ball : MonoBehaviour
 {
     private int _score;
+    private Vector3 _startPosition;
 
     public event UnityAction GameOver;
     public event UnityAction<int> ScoreChanged;
+
+    private void Start()
+    {
+        _startPosition = transform.position;
+    }
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -22,7 +28,7 @@ public class Ball : MonoBehaviour
         }
         else if (collision.isTrigger)
         {
-            Die();
+            GameOver?.Invoke();
         }
     }
 
@@ -31,17 +37,12 @@ public class Ball : MonoBehaviour
         _score = 0;
         ScoreChanged?.Invoke(_score);
 
-        transform.position = new Vector3(0, 1.8f, 0);
+        transform.position = _startPosition;
     }
 
     private void IncreaseScore()
     {
         _score++;
         ScoreChanged?.Invoke(_score);
-    }
-
-    private void Die()
-    {
-        GameOver?.Invoke();
     }
 }

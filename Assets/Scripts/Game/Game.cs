@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class Game : MonoBehaviour
 {
     [SerializeField] private Ball _ball;
-    [SerializeField] private ReMover _reMover;
-    [SerializeField] private GameOverScreen _gameOverScreen;
+    [SerializeField] private Shifter _shifter;
+    [SerializeField] private Spawner _spawner;
+    [SerializeField] private GameoverScreen _gameoverScreen;
+    [SerializeField] private PauseMenu _pauseMenu;
 
     private Camera _camera;
     private Vector3 _cameraStartPosition;
@@ -15,23 +17,33 @@ public class Game : MonoBehaviour
     private void OnEnable()
     {
         _ball.GameOver += OnGameOver;
-        _gameOverScreen.MainMenuButtonClick += OnMainMenuButtonClick;
-        _gameOverScreen.RestartButtonClick += OnRestartButtonClick;
+
+        _gameoverScreen.MainMenuButtonClick += OnMainMenuButtonClick;
+        _gameoverScreen.RestartButtonClick += OnRestartButtonClick;
+
+        _pauseMenu.ResumeButtonClick += GameStart;
     }
 
     private void OnDisable()
     {
         _ball.GameOver -= OnGameOver;
-        _gameOverScreen.MainMenuButtonClick -= OnMainMenuButtonClick;
-        _gameOverScreen.RestartButtonClick -= OnRestartButtonClick;
+
+        _gameoverScreen.MainMenuButtonClick -= OnMainMenuButtonClick;
+        _gameoverScreen.RestartButtonClick -= OnRestartButtonClick;
+
+        _pauseMenu.ResumeButtonClick -= GameStart;
     }
 
     private void Start()
     {
         _camera = Camera.main;
         _cameraStartPosition = _camera.transform.position;
+    }
 
-        Time.timeScale = 1;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            OnPause();
     }
 
     private void OnMainMenuButtonClick()
@@ -42,7 +54,8 @@ public class Game : MonoBehaviour
     private void OnRestartButtonClick()
     {
         _ball.BallReset();
-        _reMover.GroundReset();
+        _shifter.GroundReset();
+        _spawner.DisableAllObstacles();
 
         _camera.transform.position = _cameraStartPosition;
 
@@ -53,13 +66,21 @@ public class Game : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        _gameOverScreen.Close();
+        _gameoverScreen.Close();
+        _pauseMenu.Close();
     }
 
     private void OnGameOver()
     {
         Time.timeScale = 0;
 
-        _gameOverScreen.Open();
+        _gameoverScreen.Open();
+    }
+
+    private void OnPause()
+    {
+        Time.timeScale = 0;
+
+        _pauseMenu.Open();
     }
 }

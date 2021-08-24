@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ReMover : MonoBehaviour
+public class Shifter : MonoBehaviour
 {
     [SerializeField] private Ball _ball;
     [SerializeField] private ExtractionPoint _extractionPoint;
     [SerializeField] private InstallationPoint _installationPoint;
 
-    private bool _isReMove;
+    private bool _isShift;
 
     private void Update()
     {
@@ -16,11 +16,11 @@ public class ReMover : MonoBehaviour
         {
             transform.position = _installationPoint.transform.position;
 
-            _isReMove = true;
+            _isShift = true;
         }
         else
         {
-            _isReMove = false;
+            _isShift = false;
         }
     }
 
@@ -31,6 +31,6 @@ public class ReMover : MonoBehaviour
 
     public bool IsMove()
     {
-        return _isReMove;
+        return _isShift;
     }
 }

@@ -6,25 +6,21 @@ public class Spawner : ObjectPool
 {
     [SerializeField] private Item[] _items;
     [SerializeField] private SpawnPoint[] _spawnPoints;
-    [SerializeField] private ReMover _groundReMover;
-
-    private Camera _camera;
+    [SerializeField] private Shifter _groundShifter;
 
     private void Start()
     {
-        _camera = Camera.main;
-
         for (int i = 0; i < _items.Length; i++)
             Initialise(_items[i]);
     }
 
     private void Update()
     {
-        if (_groundReMover.IsMove())
+        if (_groundShifter.IsMove())
         {
             DisableAllObstacles();
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < _spawnPoints.Length; i++)
             {
                 if (TryGetObject(out Item item))
                 {
@@ -33,11 +29,11 @@ public class Spawner : ObjectPool
 
                     ReActivateObstacleChilds(item);
                 }
-            } 
+            }
         }
     }
 
-    private void DisableAllObstacles()
+    public void DisableAllObstacles()
     {
         foreach (var item in _pool)
             item.gameObject.SetActive(false);

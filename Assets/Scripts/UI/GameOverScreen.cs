@@ -4,48 +4,50 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class GameOverScreen : MonoBehaviour
+public class GameoverScreen : MonoBehaviour
 {
-    [SerializeField] private CanvasGroup _canvasGroup;
-    [SerializeField] private Button _mainMenu;
-    [SerializeField] private Button _restart;
+    [SerializeField] protected CanvasGroup CanvasGroup;
+    [SerializeField] protected Button MainMenu;
+    [SerializeField] protected Button Restart;
 
     public event UnityAction RestartButtonClick;
     public event UnityAction MainMenuButtonClick;
 
     private void OnEnable()
     {
-        _mainMenu.onClick.AddListener(OnMainMenuButtonClick);
-        _restart.onClick.AddListener(OnRestartButtonClick);
+        MainMenu.onClick.AddListener(OnMainMenuButtonClick);
+        Restart.onClick.AddListener(OnRestartButtonClick);
     }
 
     private void OnDisable()
     {
-        _mainMenu.onClick.RemoveListener(OnMainMenuButtonClick);
-        _restart.onClick.RemoveListener(OnRestartButtonClick);
+        MainMenu.onClick.RemoveListener(OnMainMenuButtonClick);
+        Restart.onClick.RemoveListener(OnRestartButtonClick);
     }
 
-    private void OnMainMenuButtonClick()
+    protected void OnMainMenuButtonClick()
     {
         MainMenuButtonClick?.Invoke();
     }
 
-    private void OnRestartButtonClick()
+    protected void OnRestartButtonClick()
     {
         RestartButtonClick?.Invoke();
     }
 
-    public void Open()
+    public virtual void Open()
     {
-        _canvasGroup.alpha = 1;
-        _mainMenu.interactable = true;
-        _restart.interactable = true;
+        CanvasGroup.alpha = 1;
+
+        MainMenu.interactable = true;
+        Restart.interactable = true;
     }
 
-    public void Close()
+    public virtual void Close()
     {
-        _canvasGroup.alpha = 0;
-        _mainMenu.interactable = false;
-        _restart.interactable = false;
+        CanvasGroup.alpha = 0;
+
+        MainMenu.interactable = false;
+        Restart.interactable = false;
     }
 }
