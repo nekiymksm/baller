@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
+    [SerializeField] protected Container _container;
+
     protected List<Item> _pool = new List<Item>();
 
     protected void Initialise(Item prefab)
     {
-        Item item = Instantiate(prefab, transform);
+        Item item = Instantiate(prefab, _container.transform);
         item.gameObject.SetActive(false);
 
         _pool.Add(item);
