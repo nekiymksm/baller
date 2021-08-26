@@ -1485,7 +1485,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 847801851}
-  m_Material: {fileID: 13400000, guid: 83de310cc542c014583b3391712277ec, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1567,6 +1567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxSpeed: 10
+  _timeToSpeedIncrease: 10
   _jumpForce: 3
   _minJumpPermission: 0.05
 --- !u!54 &847801857
@@ -1783,6 +1784,7 @@ MonoBehaviour:
   _ball: {fileID: 847801858}
   _shifter: {fileID: 360567598}
   _spawner: {fileID: 1994429307}
+  _controller: {fileID: 847801856}
   _gameoverScreen: {fileID: 1447869816}
   _pauseMenu: {fileID: 726844201}
 --- !u!1 &1034887209
@@ -2767,6 +2769,8 @@ MonoBehaviour:
   - {fileID: 430516738898065415, guid: 235b4b67652ff3b44b4d3fb783eeb4b1, type: 3}
   _disablePoint: {fileID: 2146471547}
   _timeBetweenSpawn: 3
+  _decreaseSpawnTimeOn: 0.5
+  _controller: {fileID: 847801856}
 --- !u!1 &2053056099
 GameObject:
   m_ObjectHideFlags: 0

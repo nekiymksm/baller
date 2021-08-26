@@ -7,11 +7,26 @@ public class Spawner : ObjectPool
     [SerializeField] private Item[] _items;
     [SerializeField] private DisablePoint _disablePoint;
     [SerializeField] private float _timeBetweenSpawn;
+    [SerializeField] private float _decreaseSpawnTimeOn;
+    [SerializeField] private Controller _controller;
 
     private float _elapsedTime = 0;
+    private float _startTimeBetweenSpawn;
+
+    private void OnEnable()
+    {
+        _controller.IncreaseMaxSpeed += DecreaseTimeBetweenSpawn;
+    }
+
+    private void OnDisable()
+    {
+        _controller.IncreaseMaxSpeed -= DecreaseTimeBetweenSpawn;
+    }
 
     private void Start()
     {
+        _startTimeBetweenSpawn = _timeBetweenSpawn;
+
         for (int i = 0; i < _items.Length; i++)
             Initialise(_items[i]);
     }
@@ -20,6 +35,12 @@ public class Spawner : ObjectPool
     {
         _elapsedTime += Time.deltaTime;
 
+        SpawnObstacle();
+        DisableObstaclesOffScreen();
+    }
+
+    private void SpawnObstacle()
+    {
         if (_elapsedTime >= _timeBetweenSpawn && TryGetObject(out Item item))
         {
             item.gameObject.SetActive(true);
@@ -29,8 +50,6 @@ public class Spawner : ObjectPool
 
             _elapsedTime = 0;
         }
-
-        DisableObstaclesOffScreen();
     }
 
     private void DisableObstaclesOffScreen()
@@ -52,5 +71,15 @@ public class Spawner : ObjectPool
     {
         foreach (var item in _pool)
             item.gameObject.SetActive(false);
+    }
+
+    private void DecreaseTimeBetweenSpawn()
+    {
+        _timeBetweenSpawn -= _decreaseSpawnTimeOn;
+    }
+
+    public void ResetTimeBetweenSpawn()
+    {
+        _timeBetweenSpawn = _startTimeBetweenSpawn;
     }
 }

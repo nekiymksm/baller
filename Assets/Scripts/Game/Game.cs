@@ -8,6 +8,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Ball _ball;
     [SerializeField] private Shifter _shifter;
     [SerializeField] private Spawner _spawner;
+    [SerializeField] private Controller _controller;
     [SerializeField] private GameoverScreen _gameoverScreen;
     [SerializeField] private PauseMenu _pauseMenu;
 
@@ -56,6 +57,8 @@ public class Game : MonoBehaviour
         _ball.BallReset();
         _shifter.GroundReset();
         _spawner.DisableAllObstacles();
+        _spawner.ResetTimeBetweenSpawn();
+        _controller.MaxSpeedReset();
 
         _camera.transform.position = _cameraStartPosition;
 
