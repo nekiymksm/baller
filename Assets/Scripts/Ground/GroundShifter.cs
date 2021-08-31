@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shifter : MonoBehaviour
+public class GroundShifter : MonoBehaviour
 {
     [SerializeField] private Ball _ball;
     [SerializeField] private ExtractionPoint _extractionPoint;
     [SerializeField] private InstallationPoint _installationPoint;
+
+    private Vector3 _groundStartPosition;
+
+    private void Start()
+    {
+        _groundStartPosition = transform.position;
+    }
 
     private void Update()
     {
@@ -16,6 +23,6 @@ public class Shifter : MonoBehaviour
 
     public void GroundReset()
     {
-        transform.position = new Vector3(15, 0, 0);
+        transform.position = _groundStartPosition;
     }
 }

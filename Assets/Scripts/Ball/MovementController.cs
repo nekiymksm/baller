@@ -5,15 +5,16 @@ using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
 
-public class Controller : MonoBehaviour
+public class MovementController : MonoBehaviour
 {
     [SerializeField] private float _maxSpeed;
-    [SerializeField] private float _timeToSpeedIncrease;
+    [SerializeField] private float _timeToIncreaseSpeed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _minJumpPermission;
 
     private Rigidbody _rigidbody;
-    private float _startMaxSpeed;
+
+    private float _startingMaxSpeed;
     private float _elapsedTime = 0;
 
     public event UnityAction IncreaseMaxSpeed;
@@ -24,7 +25,7 @@ public class Controller : MonoBehaviour
 
         _minJumpPermission += transform.position.y;
 
-        _startMaxSpeed = _maxSpeed;
+        _startingMaxSpeed = _maxSpeed;
     }
 
     private void Update()
@@ -37,7 +38,7 @@ public class Controller : MonoBehaviour
     private void FixedUpdate()
     {
         Roll();
-        TryJump();
+        Jump();
     }
 
     private void Roll()
@@ -46,19 +47,15 @@ public class Controller : MonoBehaviour
             _rigidbody.AddForce(Vector3.right, ForceMode.Impulse);
     }
 
-    private void TryJump()
+    private void Jump()
     {
-        float jump = Input.GetAxis("Fire1");
-
-        Vector3 moveUp = new Vector3(0, jump, 0);
-
         if (_rigidbody.position.y <= _minJumpPermission)
-            _rigidbody.AddForce(moveUp * _jumpForce, ForceMode.Impulse);
+            _rigidbody.AddForce(new Vector3(0, Input.GetAxis("Fire1"), 0) * _jumpForce, ForceMode.Impulse);
     }
 
     private void MaxSpeedIncrease()
     {
-        if (_elapsedTime >= _timeToSpeedIncrease)
+        if (_elapsedTime >= _timeToIncreaseSpeed)
         {
             _maxSpeed += 1;
             _elapsedTime = 0;
@@ -69,6 +66,6 @@ public class Controller : MonoBehaviour
 
     public void MaxSpeedReset()
     {
-        _maxSpeed = _startMaxSpeed;
+        _maxSpeed = _startingMaxSpeed;
     }
 }

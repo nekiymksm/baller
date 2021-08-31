@@ -6,26 +6,26 @@ public class Spawner : ObjectPool
 {
     [SerializeField] private Item[] _items;
     [SerializeField] private DisablePoint _disablePoint;
+    [SerializeField] private MovementController _movementController;
     [SerializeField] private float _timeBetweenSpawn;
-    [SerializeField] private float _decreaseSpawnTimeOn;
-    [SerializeField] private Controller _controller;
+    [SerializeField] private float _spawnTimeReductionUnit;
 
     private float _elapsedTime = 0;
-    private float _startTimeBetweenSpawn;
+    private float _startingTimeBetweenSpawn;
 
     private void OnEnable()
     {
-        _controller.IncreaseMaxSpeed += DecreaseTimeBetweenSpawn;
+        _movementController.IncreaseMaxSpeed += DecreaseTimeBetweenSpawn;
     }
 
     private void OnDisable()
     {
-        _controller.IncreaseMaxSpeed -= DecreaseTimeBetweenSpawn;
+        _movementController.IncreaseMaxSpeed -= DecreaseTimeBetweenSpawn;
     }
 
     private void Start()
     {
-        _startTimeBetweenSpawn = _timeBetweenSpawn;
+        _startingTimeBetweenSpawn = _timeBetweenSpawn;
 
         for (int i = 0; i < _items.Length; i++)
             Initialise(_items[i]);
@@ -46,7 +46,7 @@ public class Spawner : ObjectPool
             item.gameObject.SetActive(true);
             item.transform.position = transform.position;
 
-            ReActivateObstacleChilds(item);
+            ActivateObstacleChilds(item);
 
             _elapsedTime = 0;
         }
@@ -61,10 +61,15 @@ public class Spawner : ObjectPool
         }
     }
 
-    private void ReActivateObstacleChilds(Item item)
+    private void ActivateObstacleChilds(Item item)
     {
         for (int i = 0; i < item.transform.childCount; i++)
             item.transform.GetChild(i).gameObject.SetActive(true);
+    }
+
+    private void DecreaseTimeBetweenSpawn()
+    {
+        _timeBetweenSpawn -= _spawnTimeReductionUnit;
     }
 
     public void DisableAllObstacles()
@@ -73,13 +78,8 @@ public class Spawner : ObjectPool
             item.gameObject.SetActive(false);
     }
 
-    private void DecreaseTimeBetweenSpawn()
-    {
-        _timeBetweenSpawn -= _decreaseSpawnTimeOn;
-    }
-
     public void ResetTimeBetweenSpawn()
     {
-        _timeBetweenSpawn = _startTimeBetweenSpawn;
+        _timeBetweenSpawn = _startingTimeBetweenSpawn;
     }
 }

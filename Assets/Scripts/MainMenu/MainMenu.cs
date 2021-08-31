@@ -16,10 +16,12 @@ public class MainMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             PlayAnimation(false);
-            ChangeButtonsState(true);
+
+            if (_animators[0].GetCurrentAnimatorStateInfo(0).loop)
+                ChangeButtonsState(true);
         }
     }
 

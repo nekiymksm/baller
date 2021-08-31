@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class Game : MonoBehaviour
 {
     [SerializeField] private Ball _ball;
-    [SerializeField] private Shifter _shifter;
+    [SerializeField] private GroundShifter _groundShifter;
     [SerializeField] private Spawner _spawner;
-    [SerializeField] private Controller _controller;
+    [SerializeField] private MovementController _controller;
     [SerializeField] private GameoverScreen _gameoverScreen;
     [SerializeField] private PauseMenu _pauseMenu;
 
@@ -55,7 +55,7 @@ public class Game : MonoBehaviour
     private void OnRestartButtonClick()
     {
         _ball.BallReset();
-        _shifter.GroundReset();
+        _groundShifter.GroundReset();
         _spawner.DisableAllObstacles();
         _spawner.ResetTimeBetweenSpawn();
         _controller.MaxSpeedReset();
