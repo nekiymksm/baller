@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -32,7 +30,7 @@ public class Ball : MonoBehaviour
         }
     }
 
-    public void BallReset()
+    public void ResetBall()
     {
         _score = 0;
         ScoreChanged?.Invoke(_score);
@@ -43,6 +41,7 @@ public class Ball : MonoBehaviour
     private void IncreaseScore()
     {
         _score++;
+
         ScoreChanged?.Invoke(_score);
     }
 }

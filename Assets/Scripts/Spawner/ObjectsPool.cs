@@ -1,19 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool : MonoBehaviour
+public class ObjectsPool : MonoBehaviour
 {
-    [SerializeField] protected Container _container;
+    [SerializeField] private Container _container;
 
-    protected List<Item> _pool = new List<Item>();
+    protected List<Item> Pool = new List<Item>();
 
     protected void Initialise(Item prefab)
     {
         Item item = Instantiate(prefab, _container.transform);
         item.gameObject.SetActive(false);
 
-        _pool.Add(item);
+        Pool.Add(item);
     }
 
     protected bool TryGetObject(out Item result)
@@ -24,7 +23,7 @@ public class ObjectPool : MonoBehaviour
 
         while (result == null)
         {
-            item = _pool[Random.Range(0, _pool.Count)];
+            item = Pool[Random.Range(0, Pool.Count)];
 
             if (item.gameObject.activeSelf == false)
                 result = item;

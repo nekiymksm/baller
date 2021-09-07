@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundShifter : MonoBehaviour
@@ -21,7 +19,7 @@ public class GroundShifter : MonoBehaviour
             transform.position = _installationPoint.transform.position;
     }
 
-    public void GroundReset()
+    public void ResetGround()
     {
         transform.position = _groundStartPosition;
     }

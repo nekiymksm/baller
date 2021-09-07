@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class GameoverScreen : MonoBehaviour
+public class GameOverScreen : MonoBehaviour
 {
     [SerializeField] protected CanvasGroup CanvasGroup;
     [SerializeField] protected Button MainMenu;

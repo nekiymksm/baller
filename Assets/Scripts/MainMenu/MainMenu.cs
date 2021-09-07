@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -25,18 +23,18 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    public void Play(string levelLabel)
+    public void OnPlayButtonClick(string levelLabel)
     {
         SceneManager.LoadScene(levelLabel);
     }
 
-    public void Autors()
+    public void OnCreatorsButtonClick()
     {
         PlayAnimation(true);
         ChangeButtonsState(false);
     }
 
-    public void Exit()
+    public void OnExitButtonClick()
     {
         Application.Quit();
     }
