@@ -5,30 +5,28 @@ public class ObjectsPool : MonoBehaviour
 {
     [SerializeField] private Container _container;
 
-    protected List<Item> Pool = new List<Item>();
+    private List<Item> _pool = new List<Item>();
 
-    protected void Initialise(Item prefab)
+    public void Initialise(Item prefab)
     {
         Item item = Instantiate(prefab, _container.transform);
         item.gameObject.SetActive(false);
 
-        Pool.Add(item);
+        _pool.Add(item);
     }
 
-    protected bool TryGetObject(out Item result)
+    public Item TryGetObject()
     {
         Item item;
 
-        result = null;
+        do item = _pool[Random.Range(0, _pool.Count)];
+        while (item.gameObject.activeSelf == true);
 
-        while (result == null)
-        {
-            item = Pool[Random.Range(0, Pool.Count)];
+        return item;
+    }
 
-            if (item.gameObject.activeSelf == false)
-                result = item;
-        }
-
-        return result != null;
+    public List<Item> GetPool()
+    {
+        return _pool;
     }
 }

@@ -5,9 +5,12 @@ public class GameHandler : MonoBehaviour
 {
     [SerializeField] private Ball _ball;
     [SerializeField] private GroundShifter _groundShifter;
-    [SerializeField] private SpawnSelector _spawners;
+    [SerializeField] private ItemSpawner _coinSpawner;
+    [SerializeField] private ItemSpawner _barrierSpawner;
     [SerializeField] private GameOverScreen _gameOverScreen;
-    [SerializeField] private PauseMenu _pauseMenu;
+    [SerializeField] private PauseMenuScreen _pauseMenuScreen;
+    [SerializeField] private KeyCode _pauseKey;
+    [SerializeField] private string _sceneNameToLoad;
 
     private Camera _camera;
     private Vector3 _cameraStartPosition;
@@ -17,9 +20,11 @@ public class GameHandler : MonoBehaviour
         _ball.GameOver += OnGameOver;
 
         _gameOverScreen.MainMenuButtonClick += OnMainMenuButtonClick;
-        _gameOverScreen.RestartButtonClick += OnRestartButtonClick;
+        _gameOverScreen.TryAgainButtonClick += OnRestartButtonClick;
 
-        _pauseMenu.ResumeButtonClick += GameStart;
+        _pauseMenuScreen.ResumeButtonClick += GameStart;
+        _pauseMenuScreen.MainMenuButtonClick += OnMainMenuButtonClick;
+        _pauseMenuScreen.RestartButtonClick += OnRestartButtonClick;
     }
 
     private void OnDisable()
@@ -27,9 +32,11 @@ public class GameHandler : MonoBehaviour
         _ball.GameOver -= OnGameOver;
 
         _gameOverScreen.MainMenuButtonClick -= OnMainMenuButtonClick;
-        _gameOverScreen.RestartButtonClick -= OnRestartButtonClick;
+        _gameOverScreen.TryAgainButtonClick -= OnRestartButtonClick;
 
-        _pauseMenu.ResumeButtonClick -= GameStart;
+        _pauseMenuScreen.ResumeButtonClick -= GameStart;
+        _pauseMenuScreen.MainMenuButtonClick -= OnMainMenuButtonClick;
+        _pauseMenuScreen.RestartButtonClick -= OnRestartButtonClick;
     }
 
     private void Start()
@@ -40,20 +47,21 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            OnPause();
+        if (Input.GetKeyDown(_pauseKey) && _gameOverScreen.gameObject.activeSelf == false)
+            TurnPauseOn();
     }
 
     private void OnMainMenuButtonClick()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(_sceneNameToLoad);
     }
 
     private void OnRestartButtonClick()
     {
         _ball.ResetBall();
         _groundShifter.ResetGround();
-        _spawners.ResetSpawners();
+        _coinSpawner.DisableAllItems();
+        _barrierSpawner.DisableAllItems();
 
         _camera.transform.position = _cameraStartPosition;
 
@@ -65,7 +73,7 @@ public class GameHandler : MonoBehaviour
         Time.timeScale = 1;
 
         _gameOverScreen.Close();
-        _pauseMenu.Close();
+        _pauseMenuScreen.Close();
     }
 
     private void OnGameOver()
@@ -75,10 +83,10 @@ public class GameHandler : MonoBehaviour
         _gameOverScreen.Open();
     }
 
-    private void OnPause()
+    private void TurnPauseOn()
     {
         Time.timeScale = 0;
 
-        _pauseMenu.Open();
+        _pauseMenuScreen.Open();
     }
 }

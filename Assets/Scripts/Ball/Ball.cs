@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(SphereCollider))]
-
 public class Ball : MonoBehaviour
 {
     private int _score;
@@ -22,7 +21,7 @@ public class Ball : MonoBehaviour
         {
             IncreaseScore();
 
-            coin.gameObject.SetActive(false);
+            coin.DisableYourself();
         }
         else if (collision.isTrigger)
         {

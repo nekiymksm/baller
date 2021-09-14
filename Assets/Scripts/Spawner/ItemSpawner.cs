@@ -1,35 +1,35 @@
 using UnityEngine;
 
-public abstract class ItemSpawner : ObjectsPool
+[RequireComponent(typeof(ObjectsPool))]
+public abstract class ItemSpawner : MonoBehaviour
 {
-    [SerializeField] private DisablePoint _disablePoint;
+    [SerializeField] protected SpawnPointer[] SpawnPointers;
+    [SerializeField] protected float TimeBetweenSpawn;
+
+    protected ObjectsPool ObjectsPool;
+    protected float ElapsedTime = 0;
 
     private void Start()
     {
+        ObjectsPool = GetComponent<ObjectsPool>();
+
         InitialiseItems();
     }
 
     private void Update()
     {
-        DisableItemsOffScreen();
-    }
+        ElapsedTime += Time.deltaTime;
 
-    public abstract void InitialiseItems();
-
-    public abstract void SpawnItem();
-
-    private void DisableItemsOffScreen()
-    {
-        for (int i = 0; i < Pool.Count; i++)
-        {
-            if (Pool[i].transform.position.x <= _disablePoint.transform.position.x)
-                Pool[i].gameObject.SetActive(false);
-        }
+        SpawnItem();
     }
 
     public void DisableAllItems()
     {
-        foreach (var item in Pool)
+        foreach (var item in ObjectsPool.GetPool())
             item.gameObject.SetActive(false);
     }
+
+    protected abstract void InitialiseItems();
+
+    protected abstract void SpawnItem();
 }

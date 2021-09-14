@@ -6,20 +6,26 @@ public class CoinsSpawner : ItemSpawner
     [SerializeField] private float _coinsAmount;
     [SerializeField] private float _distanceBetweenCoins;
 
-    public override void InitialiseItems()
+    protected override void InitialiseItems()
     {
         for (int i = 0; i < _coinsAmount; i++)
-            Initialise(_coin);
+            ObjectsPool.Initialise(_coin);
     }
 
-    public override void SpawnItem()
+    protected override void SpawnItem()
     {
-        for (int i = 0; i < Random.Range(0, 4); i++)
+        if (ElapsedTime >= TimeBetweenSpawn)
         {
-            if (TryGetObject(out Item coin))
+            float yAxis = SpawnPointers[Random.Range(0, 1)].transform.position.y;
+
+            for (int i = 0; i < Random.Range(1, 5); i++)
             {
+                Item coin = ObjectsPool.TryGetObject();
+
                 coin.gameObject.SetActive(true);
-                coin.transform.position = new Vector3(transform.position.x + i * _distanceBetweenCoins, transform.position.y, transform.position.z);
+                coin.transform.position = new Vector3(transform.position.x + i * _distanceBetweenCoins, yAxis, transform.position.z);
+
+                ElapsedTime = 0;
             }
         }
     }

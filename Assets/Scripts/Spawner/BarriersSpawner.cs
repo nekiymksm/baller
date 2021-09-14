@@ -4,18 +4,22 @@ public class BarriersSpawner : ItemSpawner
 {
     [SerializeField] private Barrier[] _barriers;
 
-    public override void InitialiseItems()
+    protected override void InitialiseItems()
     {
         for (int i = 0; i < _barriers.Length; i++)
-            Initialise(_barriers[i]);
+            ObjectsPool.Initialise(_barriers[i]);
     }
 
-    public override void SpawnItem()
+    protected override void SpawnItem()
     {
-        if (TryGetObject(out Item barrier))
+        if (ElapsedTime >= TimeBetweenSpawn)
         {
+            Item barrier = ObjectsPool.TryGetObject();
+
             barrier.gameObject.SetActive(true);
-            barrier.transform.position = transform.position;
+            barrier.transform.position = SpawnPointers[Random.Range(0, SpawnPointers.Length)].transform.position;
+
+            ElapsedTime = 0;
         }
     }
 }

@@ -2,7 +2,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Ball))]
 [RequireComponent(typeof(Rigidbody))]
-
 public class MovementController : MonoBehaviour
 {
     [SerializeField] private float _maxSpeed;

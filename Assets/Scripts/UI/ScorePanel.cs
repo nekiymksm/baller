@@ -4,7 +4,7 @@ using UnityEngine;
 public class ScorePanel : MonoBehaviour
 {
     [SerializeField] private Ball _ball;
-    [SerializeField] private TMP_Text _score;
+    [SerializeField] private TMP_Text _scoreText;
 
     private void OnEnable()
     {
@@ -18,6 +18,6 @@ public class ScorePanel : MonoBehaviour
 
     private void OnScoreChanged(int score)
     {
-        _score.text = score.ToString();
+        _scoreText.text = score.ToString();
     }
 }

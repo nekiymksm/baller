@@ -2,50 +2,33 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class GameOverScreen : MonoBehaviour
+public class GameOverScreen : InGameMenuScreen
 {
-    [SerializeField] protected CanvasGroup CanvasGroup;
-    [SerializeField] protected Button MainMenu;
-    [SerializeField] protected Button Restart;
+    [SerializeField] private Button _mainMenuButton;
+    [SerializeField] private Button _tryAgainButton;
 
-    public event UnityAction RestartButtonClick;
+    public event UnityAction TryAgainButtonClick;
     public event UnityAction MainMenuButtonClick;
 
     private void OnEnable()
     {
-        MainMenu.onClick.AddListener(OnMainMenuButtonClick);
-        Restart.onClick.AddListener(OnRestartButtonClick);
+        _mainMenuButton.onClick.AddListener(OnMainMenuButtonClick);
+        _tryAgainButton.onClick.AddListener(OnTryAgainButtonClick);
     }
 
     private void OnDisable()
     {
-        MainMenu.onClick.RemoveListener(OnMainMenuButtonClick);
-        Restart.onClick.RemoveListener(OnRestartButtonClick);
+        _mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClick);
+        _tryAgainButton.onClick.RemoveListener(OnTryAgainButtonClick);
     }
 
-    protected void OnMainMenuButtonClick()
+    private void OnMainMenuButtonClick()
     {
         MainMenuButtonClick?.Invoke();
     }
 
-    protected void OnRestartButtonClick()
+    private void OnTryAgainButtonClick()
     {
-        RestartButtonClick?.Invoke();
-    }
-
-    public virtual void Open()
-    {
-        CanvasGroup.alpha = 1;
-
-        MainMenu.interactable = true;
-        Restart.interactable = true;
-    }
-
-    public virtual void Close()
-    {
-        CanvasGroup.alpha = 0;
-
-        MainMenu.interactable = false;
-        Restart.interactable = false;
+        TryAgainButtonClick?.Invoke();
     }
 }
