@@ -1,12 +1,12 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Ball))]
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Ball)), RequireComponent(typeof(Rigidbody))]
 public class MovementController : MonoBehaviour
 {
     [SerializeField] private float _maxSpeed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _minJumpPermission;
+    [SerializeField] private string _axisNameToJump;
 
     private Rigidbody _rigidbody;
 
@@ -32,6 +32,6 @@ public class MovementController : MonoBehaviour
     private void TryJump()
     {
         if (_rigidbody.position.y <= _minJumpPermission)
-            _rigidbody.AddForce(new Vector3(0, Input.GetAxis("Fire1"), 0) * _jumpForce, ForceMode.Impulse);
+            _rigidbody.AddForce(new Vector3(0, Input.GetAxis(_axisNameToJump), 0) * _jumpForce, ForceMode.Impulse);
     }
 }

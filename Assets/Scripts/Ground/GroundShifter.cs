@@ -6,21 +6,14 @@ public class GroundShifter : MonoBehaviour
     [SerializeField] private ExtractionPoint _extractionPoint;
     [SerializeField] private InstallationPoint _installationPoint;
 
-    private Vector3 _groundStartPosition;
-
-    private void Start()
+    private void Update()
     {
-        _groundStartPosition = transform.position;
+        ShiftGround();
     }
 
-    private void Update()
+    private void ShiftGround()
     {
         if (_ball.transform.position.x >= _extractionPoint.transform.position.x)
             transform.position = _installationPoint.transform.position;
-    }
-
-    public void ResetGround()
-    {
-        transform.position = _groundStartPosition;
     }
 }

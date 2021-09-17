@@ -1,14 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
-public class GameOverScreen : InGameMenuScreen
+public class GameOverScreen : Screen
 {
     [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Button _tryAgainButton;
 
-    public event UnityAction TryAgainButtonClick;
-    public event UnityAction MainMenuButtonClick;
+    private void Start()
+    {
+        GetSceneLoader();
+    }
 
     private void OnEnable()
     {
@@ -24,11 +25,13 @@ public class GameOverScreen : InGameMenuScreen
 
     private void OnMainMenuButtonClick()
     {
-        MainMenuButtonClick?.Invoke();
+        _sceneLoader.LoadScene(SceneLoader._mainMenuSceneName);
     }
 
     private void OnTryAgainButtonClick()
     {
-        TryAgainButtonClick?.Invoke();
+        _sceneLoader.LoadScene(SceneLoader._startingLevelSceneName);
+
+        CloseScreen();
     }
 }

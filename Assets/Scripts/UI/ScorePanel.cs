@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class ScorePanel : MonoBehaviour
+public class ScorePanel : Screen
 {
     [SerializeField] private Ball _ball;
     [SerializeField] private TMP_Text _scoreText;

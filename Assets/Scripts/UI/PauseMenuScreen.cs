@@ -1,43 +1,40 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 
-public class PauseMenuScreen : InGameMenuScreen
+public class PauseMenuScreen : Screen
 {
     [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _resumeButton;
 
-    public event UnityAction RestartButtonClick;
-    public event UnityAction MainMenuButtonClick;
-    public event UnityAction ResumeButtonClick;
+    private void Start()
+    {
+        GetSceneLoader();
+    }
 
     private void OnEnable()
     {
         _mainMenuButton.onClick.AddListener(OnMainMenuButtonClick);
         _restartButton.onClick.AddListener(OnRestartButtonClick);
-        _resumeButton.onClick.AddListener(OnResumeButtonClick);
+        _resumeButton.onClick.AddListener(CloseScreen);
     }
 
     private void OnDisable()
     {
         _mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClick);
         _restartButton.onClick.RemoveListener(OnRestartButtonClick);
-        _resumeButton.onClick.RemoveListener(OnResumeButtonClick);
+        _resumeButton.onClick.RemoveListener(CloseScreen);
     }
 
     private void OnMainMenuButtonClick()
     {
-        MainMenuButtonClick?.Invoke();
+        _sceneLoader.LoadScene(SceneLoader._mainMenuSceneName);
     }
 
     private void OnRestartButtonClick()
     {
-        RestartButtonClick?.Invoke();
-    }
+        _sceneLoader.LoadScene(SceneLoader._startingLevelSceneName);
 
-    private void OnResumeButtonClick()
-    {
-        ResumeButtonClick?.Invoke();
+        CloseScreen();
     }
 }
