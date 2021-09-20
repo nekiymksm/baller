@@ -23,12 +23,6 @@ public abstract class ItemSpawner : MonoBehaviour
         SpawnItem();
     }
 
-    public void DisableAllItems()
-    {
-        foreach (var item in ObjectsPool.GetPool())
-            item.gameObject.SetActive(false);
-    }
-
     protected abstract void InitialiseItems();
 
     protected abstract void SpawnItem();

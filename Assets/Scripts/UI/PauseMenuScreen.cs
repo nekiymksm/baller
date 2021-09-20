@@ -1,16 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseMenuScreen : Screen
 {
     [SerializeField] private Button _mainMenuButton;
     [SerializeField] private Button _restartButton;
     [SerializeField] private Button _resumeButton;
-
-    private void Start()
-    {
-        GetSceneLoader();
-    }
 
     private void OnEnable()
     {
@@ -28,12 +24,12 @@ public class PauseMenuScreen : Screen
 
     private void OnMainMenuButtonClick()
     {
-        _sceneLoader.LoadScene(SceneLoader._mainMenuSceneName);
+        SceneManager.LoadScene(_mainMenuSceneName);
     }
 
     private void OnRestartButtonClick()
     {
-        _sceneLoader.LoadScene(SceneLoader._startingLevelSceneName);
+        SceneManager.LoadScene(_startingLevelSceneName);
 
         CloseScreen();
     }

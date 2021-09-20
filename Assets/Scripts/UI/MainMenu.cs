@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : Screen
 {
@@ -10,7 +11,6 @@ public class MainMenu : Screen
 
     private void Start()
     {
-        GetSceneLoader();
         OpenScreen();
     }
 
@@ -30,7 +30,7 @@ public class MainMenu : Screen
 
     private void OnPlayButtonClick()
     {
-        _sceneLoader.LoadScene(SceneLoader._startingLevelSceneName);
+        SceneManager.LoadScene(_startingLevelSceneName);
     }
 
     private void OnCreatorsButtonClick()

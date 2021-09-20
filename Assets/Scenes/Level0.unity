@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4490819, g: 0.49915498, b: 0.5757139, a: 1}
+  m_IndirectSpecularColor: {r: 0.44908667, g: 0.49916005, b: 0.57571477, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -481,12 +481,11 @@ MonoBehaviour:
   SpawnPointers:
   - {fileID: 840931732}
   - {fileID: 1676079465}
-  - {fileID: 372425137}
   TimeBetweenSpawn: 3
   _barriers:
   - {fileID: 430516738898065415, guid: 235b4b67652ff3b44b4d3fb783eeb4b1, type: 3}
-  - {fileID: -5641678221334526471, guid: 13ae31eb5adc4884ba5b27334fc155c9, type: 3}
-  - {fileID: 3229772593670953360, guid: 6173511c15168274b81710b69df121ed, type: 3}
+  - {fileID: 3115591517971681663, guid: 9bd9264e21f4fcf49ab676cd8fbbb03a, type: 3}
+  - {fileID: 5591811655054320133, guid: 6173511c15168274b81710b69df121ed, type: 3}
 --- !u!114 &143866790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,49 +784,6 @@ MonoBehaviour:
   _ball: {fileID: 847801858}
   _extractionPoint: {fileID: 1299730175}
   _installationPoint: {fileID: 793237274}
---- !u!1 &372425135
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 372425136}
-  - component: {fileID: 372425137}
-  m_Layer: 0
-  m_Name: Spawn Pointer 3
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &372425136
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 372425135}
-  m_LocalRotation: {x: -0.021814894, y: -0, z: -0, w: 0.99976206}
-  m_LocalPosition: {x: 15, y: 0.5, z: 10.02}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 963194228}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &372425137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 372425135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09e48e80ac4b9e647ae721d5527a9ed9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &548546271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,13 +1082,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ball: {fileID: 847801858}
-  _groundShifter: {fileID: 360567598}
-  _coinSpawner: {fileID: 1553403489}
-  _barrierSpawner: {fileID: 143866789}
   _gameOverScreen: {fileID: 1447869816}
   _pauseMenuScreen: {fileID: 726844201}
   _pauseKey: 27
-  _sceneNameToLoad: MainMenu
 --- !u!4 &621965415
 Transform:
   m_ObjectHideFlags: 0
@@ -1613,7 +1565,7 @@ GameObject:
   - component: {fileID: 840931731}
   - component: {fileID: 840931732}
   m_Layer: 0
-  m_Name: Spawn Pointer 1
+  m_Name: Top Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1942,7 +1894,6 @@ RectTransform:
   - {fileID: 2146471546}
   - {fileID: 840931731}
   - {fileID: 1676079464}
-  - {fileID: 372425136}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 2.5, y: 0, z: 0}
@@ -2627,6 +2578,7 @@ MonoBehaviour:
   _coin: {fileID: 8167795322266516119, guid: 09ab03b82309cb343b266182e29ae723, type: 3}
   _coinsAmount: 10
   _distanceBetweenCoins: 3
+  _maxCoinsCount: 5
 --- !u!114 &1553403490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2741,7 +2693,7 @@ GameObject:
   - component: {fileID: 1676079464}
   - component: {fileID: 1676079465}
   m_Layer: 0
-  m_Name: Spawn Pointer 2
+  m_Name: Low Spawn Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -24,9 +24,4 @@ public class ObjectsPool : MonoBehaviour
 
         return item;
     }
-
-    public List<Item> GetPool()
-    {
-        return _pool;
-    }
 }

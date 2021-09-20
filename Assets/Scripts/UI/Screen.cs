@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SceneLoader))]
 public abstract class Screen : MonoBehaviour
 {
-    protected SceneLoader _sceneLoader;
+    protected string _startingLevelSceneName = "Level0";
+    protected string _mainMenuSceneName = "MainMenu";
 
     public virtual void OpenScreen()
     {
@@ -17,10 +17,5 @@ public abstract class Screen : MonoBehaviour
         Time.timeScale = 1;
 
         gameObject.SetActive(false);
-    }
-
-    protected SceneLoader GetSceneLoader()
-    {
-        return _sceneLoader = GetComponent<SceneLoader>();
     }
 }
