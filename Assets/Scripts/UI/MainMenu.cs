@@ -11,7 +11,7 @@ public class MainMenu : Screen
 
     private void Start()
     {
-        OpenScreen();
+        Open();
     }
 
     private void OnEnable()
@@ -35,7 +35,7 @@ public class MainMenu : Screen
 
     private void OnCreatorsButtonClick()
     {
-        _creatorsScreen.OpenScreen();
+        _creatorsScreen.Open();
     }
 
     private void OnExitButtonClick()
@@ -43,7 +43,7 @@ public class MainMenu : Screen
         Application.Quit();
     }
 
-    public override void OpenScreen()
+    public override void Open()
     {
         Time.timeScale = 1;
     }

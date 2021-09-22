@@ -10,20 +10,20 @@ public class CreatorsScreen : Screen
 
     private void OnEnable()
     {
-        _screenButton.onClick.AddListener(CloseScreen);
+        _screenButton.onClick.AddListener(Close);
     }
 
     private void OnDisable()
     {
-        _screenButton.onClick.RemoveListener(CloseScreen);
+        _screenButton.onClick.RemoveListener(Close);
     }
 
-    public override void OpenScreen()
+    public override void Open()
     {
         PlayAnimation(true);
     }
 
-    public override void CloseScreen()
+    public override void Close()
     {
         PlayAnimation(false);
     }

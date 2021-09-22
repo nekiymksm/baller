@@ -5,14 +5,14 @@ public abstract class Screen : MonoBehaviour
     protected string _startingLevelSceneName = "Level0";
     protected string _mainMenuSceneName = "MainMenu";
 
-    public virtual void OpenScreen()
+    public virtual void Open()
     {
         Time.timeScale = 0;
 
         gameObject.SetActive(true);
     }
 
-    public virtual void CloseScreen()
+    public virtual void Close()
     {
         Time.timeScale = 1;
 

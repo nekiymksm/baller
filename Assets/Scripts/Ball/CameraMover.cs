@@ -8,10 +8,10 @@ public class CameraMover : MonoBehaviour
 
     private void Update()
     {
-        MoveCamera();
+        Move();
     }
 
-    private void MoveCamera()
+    private void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(_ball.transform.position.x - _xAxisIndent, transform.position.y, transform.position.z), _centeringSpeed);
     }

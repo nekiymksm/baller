@@ -12,14 +12,14 @@ public class PauseMenuScreen : Screen
     {
         _mainMenuButton.onClick.AddListener(OnMainMenuButtonClick);
         _restartButton.onClick.AddListener(OnRestartButtonClick);
-        _resumeButton.onClick.AddListener(CloseScreen);
+        _resumeButton.onClick.AddListener(Close);
     }
 
     private void OnDisable()
     {
         _mainMenuButton.onClick.RemoveListener(OnMainMenuButtonClick);
         _restartButton.onClick.RemoveListener(OnRestartButtonClick);
-        _resumeButton.onClick.RemoveListener(CloseScreen);
+        _resumeButton.onClick.RemoveListener(Close);
     }
 
     private void OnMainMenuButtonClick()
@@ -31,6 +31,6 @@ public class PauseMenuScreen : Screen
     {
         SceneManager.LoadScene(_startingLevelSceneName);
 
-        CloseScreen();
+        Close();
     }
 }

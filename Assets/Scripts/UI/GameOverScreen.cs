@@ -28,6 +28,6 @@ public class GameOverScreen : Screen
     {
         SceneManager.LoadScene(_startingLevelSceneName);
 
-        CloseScreen();
+        Close();
     }
 }

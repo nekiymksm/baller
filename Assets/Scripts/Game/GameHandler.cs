@@ -24,12 +24,12 @@ public class GameHandler : MonoBehaviour
 
     private void OnGameOver()
     {
-        _gameOverScreen.OpenScreen();
+        _gameOverScreen.Open();
     }
 
     private void TryTurnPauseOn()
     {
         if (Input.GetKeyDown(_pauseKey) && _gameOverScreen.gameObject.activeSelf == false)
-            _pauseMenuScreen.OpenScreen();
+            _pauseMenuScreen.Open();
     }
 }
